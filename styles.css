@@ -1,0 +1,23 @@
+
+
+:root {
+    --background-img: url('./assets/images/bg-light-theme.png');
+}
+
+
+
+* {
+    box-sizing: border-box;
+    padding:0;
+    margin: 0;
+    background-image: var(--background-img);
+}
+
+.darkmode {
+   --background-img: url('./assets/images/bg-dark-theme.png');
+}
+
+body {
+    background-image: var(--background-img);
+    height: 100vh;
+}
