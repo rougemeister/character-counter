@@ -8,7 +8,37 @@
     <script src="./script.js" defer></script>
 </head>
 <body>
-    <div>I am a div</div>
-    <div class="middle">I am in the middle</div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- <img src="./assets/images/logo-dark-theme.svg"> -->
+                <img src="./assets/images/logo-light-theme.svg">
+            </div>
+            <div>
+                <button>
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 22 22"><g clip-path="url(#a)"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M11 1.833v1.834m0 14.666v1.834M3.666 11H1.833m3.955-5.212L4.49 4.492m11.72 1.296 1.297-1.296M5.788 16.215 4.49 17.512m11.72-1.296 1.297 1.296M20.166 11h-1.833m-2.75 0a4.583 4.583 0 1 1-9.167 0 4.583 4.583 0 0 1 9.167 0Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h22v22H0z"/></clipPath></defs></svg> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 22 22"><g clip-path="url(#a)"><path stroke="#12131A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M20.125 11.877A7.333 7.333 0 1 1 10.124 1.875a9.168 9.168 0 1 0 10 10.002Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h22v22H0z"/></clipPath></defs></svg>
+                </button>
+            </div>
+        </header>
+        <main>
+            <h1>Analyze your text in real-time</h1>
+            <div class="input-container">
+                <textarea id="text-input" placeholder="Type or paste your text here..."></textarea>
+                <div class="input-wrapper">
+                    <div>  
+                        <input type="checkbox" id="spaces">
+                        <label for="spaces">Exclude Spaces</label>
+                    </div>
+                 <div>
+                    <input type="checkbox" name="char-limit" id="char-limit">
+                    <label for="char-limit">Set Character Limit</label>
+                </div>
+                </div>
+                <div class="char-count">
+                    Approx. reading time 1min
+                </div>
+            </div>
+    </div>
 </body>
 </html>
