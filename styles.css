@@ -115,22 +115,26 @@ textarea:focus {
         height: 116px;
         width: 100%;
         border-radius: 10px;
-      img {
-        align-self: flex-end;
-        height: 100%;
-        border-bottom-right-radius: 10px;
-        border-top-right-radius: 10px;
+    
       }
        
     }
     .char {
+        background-image: url('./assets/images/pattern-character-count.svg');
+        background-repeat: no-repeat;
+        background-position: right;
         background-color: var(--purple);
-        display: flex;
     }
     .word-count {
         background-color: var(--yellow);
+        background-image: url('./assets/images/pattern-word-count.svg');
+        background-repeat: no-repeat;
+        background-position: right;
     }
     .sentence-count {
+        background-image: url('./assets/images/pattern-sentence-count.svg');
+        background-repeat: no-repeat;
+        background-position: right;
         background-color: var(--orange);
     }
     .stat {
@@ -145,7 +149,6 @@ textarea:focus {
         }
     }
 
-}
 
 
 .progress-bar-container {
@@ -224,4 +227,38 @@ textarea:focus {
 
 .letter-N {
     width: 20%;
+}
+
+
+
+/* Media Queries */
+
+@media screen and (min-width: 768px) {
+
+   .container {
+    padding: 32px;
+    h1 {
+        font-size: 64px;
+        letter-spacing: 1px;
+     }
+    }
+
+    .tiles {
+        flex-direction: row;
+        .tile {
+            height: 150px;
+        }
+        .stat {
+            display: flex;
+            justify-content: center;
+            h2 {
+                font-size: 64px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+        }
+    }
+    
 }
