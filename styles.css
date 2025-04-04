@@ -28,6 +28,9 @@
 
 /* .darkmode {
    --background-img: url('./assets/images/bg-dark-theme.png');
+   --base-color: #1f1f22;
+   --text-color: #fff;
+   --secondary-text-color: #fff;
 } */
 
 body {
@@ -74,6 +77,7 @@ header {
         line-height: 1;
         letter-spacing: -3px;
         margin-bottom: 32px;
+        margin-top: 16px;
     
     }
     textarea {
@@ -85,8 +89,9 @@ header {
         background-color: var(--base-color);
         color: var(--secondary-text-color);
         font-size: 16px;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'DMSans-regular', sans-serif;
         resize: none;
+        line-height: 1.5;
     }
 
 }
@@ -96,4 +101,36 @@ header {
     flex-direction: column;
     gap: 10px;
     margin: 10px 0;
+}
+
+.tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    .tile {
+        display: flex;
+        justify-content: space-between;
+        height: 116px;
+        width: 100%;
+        border-radius: 10px;
+      img {
+        align-self: flex-end;
+        height: 100%;
+        border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+       
+    }
+    .char {
+        background-color: var(--purple);
+        display: flex;
+    }
+    .word-count {
+        background-color: var(--yellow);
+    }
+    .sentence-count {
+        background-color: var(--orange);
+    }
+
 }
