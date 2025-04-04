@@ -262,3 +262,7 @@ textarea:focus {
     }
     
 }
+
+.letter {
+    width:15px;
+}
