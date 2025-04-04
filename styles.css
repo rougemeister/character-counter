@@ -237,7 +237,7 @@ textarea:focus {
 
 /* Media Queries */
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 580px) {
 
 
    .container {
@@ -251,6 +251,7 @@ textarea:focus {
     header {
     .logo img{
             width: 245px;
+            height: 40px;
         
     }
     }
@@ -291,3 +292,11 @@ textarea:focus {
     
 }
 
+
+
+@media screen and (min-width: 1024px) {
+    .container {
+        width: 70%;
+        margin:0 auto;
+    }
+}
