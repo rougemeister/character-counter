@@ -1,12 +1,4 @@
-@font-face {
-    
-    font-family: 'DMSans-regular';
-    src: url('./assets/fonts/DM_Sans/static/DMSans-Regular.ttf');
-    font-family: 'DMSans-bold';
-    src: url('./assets/fonts/DM_Sans/static/DMSans-Bold.ttf');
-
-}
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 :root {
     --background-img: url('./assets/images/bg-light-theme.png');
@@ -36,7 +28,8 @@
 body {
     background-image: var(--background-img);
     height: 100vh;
-    font-family: 'DMSans-regular', sans-serif;
+    font-family: "DM Sans", sans-serif;
+    color: var(--text-color);
 }
 
 
@@ -72,28 +65,33 @@ header {
     h1 {
         font-size: 40px;
         color: var(--text-color);
-        font-family: 'DMSans-bold';
+        font-family: "DM Sans", sans-serif;
         text-align: center;
         line-height: 1;
-        letter-spacing: -3px;
+        letter-spacing: -1px;
         margin-bottom: 32px;
         margin-top: 16px;
     
     }
-    textarea {
-        width: 100%;
-        height: 200px;
-        padding: 10px;
-        border-radius: 5px;
-        border: none;
-        background-color: var(--base-color);
-        color: var(--secondary-text-color);
-        font-size: 16px;
-        font-family: 'DMSans-regular', sans-serif;
-        resize: none;
-        line-height: 1.5;
-    }
+    
+}
 
+textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--base-color);
+    color: var(--secondary-text-color);
+    font-size: 16px;
+    font-family: "DM Sans", sans-serif;
+    resize: none;
+    line-height: 1.5;
+}
+textarea:focus {
+
+    outline-color: #E4E4EF;
 }
 
 .input-wrapper {
@@ -138,8 +136,7 @@ header {
     .stat {
         display: flex;
         flex-direction: column;
-        margin: 20px;
-        gap: 10px;
+        margin-left: 20px;
         h2 {
             font-size: 40px;
         }
@@ -160,6 +157,12 @@ header {
 .progress-bar-title {
     margin: 24px 0 20px 0;
     font-size: 24px;
+   font-family: "DM Sans", sans-serif;
+   
+}
+
+.letter {
+    width: 15px;
 }
 .progress-bar {
     display: flex;
@@ -172,8 +175,9 @@ header {
 
 
 .progress {
-    display: flex;
-    width: 100%;
+    width: 212px;
+    border-radius: 100px;
+    background-color: var(--base-color);
 }
 .bar-visible {
     background-color: var(--purple);
@@ -183,8 +187,41 @@ header {
 }
 
 .bar-faint {
-    background-color: var(--base-color);
+   
     height: 12px;
     width: 70%;
-    border-radius: 100px;
+    
+}
+
+.percentage {
+    text-align: right;
+    width: 87px;
+}
+.toggle-overflow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    font-size: 20px;
+    
+}
+
+.letter-E {
+    width: 45%;
+}
+
+.letter-I {
+    width: 40%;
+}
+
+.letter-T {
+    width: 35%;
+}
+
+.letter-O {
+    width: 30%;
+}
+
+.letter-N {
+    width: 20%;
 }
