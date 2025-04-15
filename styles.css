@@ -23,6 +23,10 @@
     --primary-text-color: var(--neutral-900);
     --secondary-text-color: var(--neutral-700);
 
+/* Styling */
+    --border-color: var(--neutral-200);
+    --bg-color: var(--neutral-100);
+
 }
 
 * {
@@ -35,18 +39,12 @@
    --background-img: url('./assets/images/bg-dark-theme.png');
    --primary-text-color: var(--neutral-100);
    --secondary-text-color: var(--neutral-200);
+   --border-color: var(--neutral-600);
+   --bg-color: var(--neutral-700);
    
 }
 
-.darkmode button,
-.darkmode .progress,
-.darkmode textarea {
-    background-color: var(--neutral-700);
-}
 
-.darkmode textarea{
-    border: 1px solid var(--neutral-700);
-}
 
 
 body {
@@ -73,15 +71,20 @@ header {
 button {
     border: none;
     cursor: pointer;
-    background: var(--neutral-100);
+    background: var(--bg-color);
     padding: 5px;
     border-radius: 5px;
 }
 
+.sun {
+    display: none;
+}
+
+
+
 header button svg {
     width: 20px;
     height: 20px;
-    fill: var(--base-color);
 }
 
 .container {
@@ -109,13 +112,14 @@ textarea {
     height: 200px;
     padding: 10px;
     border-radius: 5px;
-    border: 2px solid var(--neutral-200);
-    background-color: var(--neutral-100);
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-color);
     color: var(--secondary-text-color);
     font-size: 16px;
     font-family: "DM Sans", sans-serif;
     resize: none;
     line-height: 1.5;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 textarea:focus {
@@ -209,7 +213,7 @@ textarea:focus {
 .progress {
     width: 212px;
     border-radius: 100px;
-    background-color: var(--neutral-100);
+    background-color: var(--bg-color);
 }
 
 .bar-visible {
@@ -272,7 +276,7 @@ input[type="checkbox"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--neutral-900);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
@@ -281,7 +285,7 @@ input[type="checkbox"]::after {
     font-weight: 1000;
     content: "\f00c";
     font-size: 12px;
-    color: var(--neutral-900);
+    color: var(--primary-text-color);
     display: none;
 }
 
@@ -306,6 +310,11 @@ input[type="checkbox"]:checked::after {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+
+.toggle-overflow svg {
+    fill: var(--primary-text-color);
 }
 
 /* Media Queries */
