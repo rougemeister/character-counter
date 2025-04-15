@@ -2,25 +2,13 @@ const sun = document.querySelector('.sun')
 const moon = document.querySelector('.moon') 
 const themeToggler = document.querySelector('.theme-toggler')   
 
-// console.log(themeToggler)
 
-// function toggleTheme (){
-//     document.body.classList.add('darkmode')
-//     
-// }
 
 themeToggler.addEventListener('click', toggleDarkMode)
 
 // themeToggler.addEventListener('click', toggleTheme)
 
-/**
- * Dark Mode Toggle
- * 
- * This script:
- * 1. Checks user's system preference for dark/light mode
- * 2. Provides a toggle function to switch between modes
- * 3. Saves the preference to localStorage
- */
+
 
 // Function to initialize dark mode based on system preference or saved preference
 function initializeDarkMode() {
@@ -38,7 +26,6 @@ function initializeDarkMode() {
     }
   
     
-    // Update button state if it exists
     updateButtonState();
   }
   
@@ -74,5 +61,5 @@ function initializeDarkMode() {
     }
   });
   
-  // Initialize dark mode when the page loads
+
   document.addEventListener('DOMContentLoaded', initializeDarkMode);
