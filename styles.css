@@ -13,9 +13,15 @@
     --blue-400: #D3A0FA;
     --yellow-500: #FF9F00;
     --orange-800: #DA3701;
-    --orange: #FE8159;
+    --orange-500: #FE8159;
 
     --background-img: url('./assets/images/bg-light-theme.png');
+
+
+
+/* Typography */
+    --primary-text-color: var(--neutral-900);
+    --secondary-text-color: var(--neutral-700);
 
 }
 
@@ -24,19 +30,30 @@
     padding: 0;
     margin: 0;
 }
-
+/* Darkmode */
 .darkmode {
    --background-img: url('./assets/images/bg-dark-theme.png');
-   --base-color: #1f1f22;
-   --text-color: #fff;
-   --secondary-text-color: #fff;
+   --primary-text-color: var(--neutral-100);
+   --secondary-text-color: var(--neutral-200);
+   
 }
+
+.darkmode button,
+.darkmode .progress,
+.darkmode textarea {
+    background-color: var(--neutral-700);
+}
+
+.darkmode textarea{
+    border: 1px solid var(--neutral-700);
+}
+
 
 body {
     background-image: var(--background-img);
     height: 100vh;
     font-family: "DM Sans", sans-serif;
-    color: var(--text-color);
+    color: var(--secondary-text-color);
     transition: background-image 0.3s, color 0.3s;
 }
 
@@ -53,10 +70,10 @@ header {
 
 }
 
-header button {
+button {
     border: none;
     cursor: pointer;
-    background: var(--base-color);
+    background: var(--neutral-100);
     padding: 5px;
     border-radius: 5px;
 }
@@ -78,7 +95,7 @@ header button svg {
 
 .container h1 {
     font-size: 40px;
-    color: var(--text-color);
+    color: var(--primary-text-color);
     font-family: "DM Sans", sans-serif;
     text-align: center;
     line-height: 1;
@@ -92,8 +109,8 @@ textarea {
     height: 200px;
     padding: 10px;
     border-radius: 5px;
-    border: none;
-    background-color: var(--base-color);
+    border: 2px solid var(--neutral-200);
+    background-color: var(--neutral-100);
     color: var(--secondary-text-color);
     font-size: 16px;
     font-family: "DM Sans", sans-serif;
@@ -102,7 +119,8 @@ textarea {
 }
 
 textarea:focus {
-    outline: 1px solid blue;
+    outline: 1px solid var(--blue-500);
+    box-shadow: 0 0 5px 2px var(--blue-500);
 }
 
 .input-wrapper {
@@ -134,11 +152,11 @@ textarea:focus {
     background-image: url('./assets/images/pattern-character-count.svg');
     background-repeat: no-repeat;
     background-position: right;
-    background-color: var(--purple);
+    background-color: var(--blue-400);
 }
 
 .word-count {
-    background-color: var(--yellow);
+    background-color: var(--yellow-500);
     background-image: url('./assets/images/pattern-word-count.svg');
     background-repeat: no-repeat;
     background-position: right;
@@ -148,7 +166,7 @@ textarea:focus {
     background-image: url('./assets/images/pattern-sentence-count.svg');
     background-repeat: no-repeat;
     background-position: right;
-    background-color: var(--orange);
+    background-color: var(--orange-500);
 }
 
 .stat {
@@ -191,11 +209,11 @@ textarea:focus {
 .progress {
     width: 212px;
     border-radius: 100px;
-    background-color: var(--base-color);
+    background-color: var(--neutral-100);
 }
 
 .bar-visible {
-    background-color: var(--purple);
+    background-color: var(--blue-400);
     height: 12px;
     width: 30%;
     border-radius: 100px;
@@ -254,7 +272,7 @@ input[type="checkbox"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--neutral-900);
     border-radius: 4px;
 }
 
@@ -263,21 +281,21 @@ input[type="checkbox"]::after {
     font-weight: 1000;
     content: "\f00c";
     font-size: 12px;
-    color: var(--text-color);
+    color: var(--neutral-900);
     display: none;
 }
 
 input[type="checkbox"]:hover, input[type="checkbox"]:focus {
-    border: 1px solid var(--purple);
+    border: 1px solid var(--blue-400);
 }
 
 input[type="checkbox"]:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--purple);
+    box-shadow: 0 0 0 2px var(--blue-400);
 }
 
 input[type="checkbox"]:checked {
-    background-color: var(--purple);
+    background-color: var(--blue-400);
 }
 
 input[type="checkbox"]:checked::after {
@@ -307,9 +325,8 @@ input[type="checkbox"]:checked::after {
     }
 
     .progress {
-        width: 100%;
+        width: 90%;
         border-radius: 100px;
-        background-color: var(--base-color);
     }
 
     .tiles {
