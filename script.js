@@ -12,7 +12,7 @@ const setLimit = document.getElementById('char-limit');
 const charLimit = document.querySelector('#char-limit-input');
 const limitWarning = document.querySelector('.limit-warning');
 const charCounter = document.getElementById('char-limit-input');
-const charLimitInfo = document.querySelector('.char-limit-info');
+const seeMore = document.querySelector('.toggle-overflow')
 
 
 
@@ -52,7 +52,6 @@ function initializeDarkMode() {
     if (toggleButton) {
       const isDarkMode = document.documentElement.classList.contains('darkmode');
       toggleButton.setAttribute('aria-pressed', isDarkMode);    
-
       moon.style.display = isDarkMode ? 'none' : 'block';
       sun.style.display = isDarkMode ? 'block' : 'none';
     }
@@ -70,27 +69,27 @@ function initializeDarkMode() {
 
   function updateLimitUI() {
     if (setLimit.checked) {
-        charLimitInfo.style.display = 'flex';
         charLimit.disabled = false;
         enforceCharLimit();
     } else {
         charLimitInfo.style.display = 'none';
         charLimit.disabled = true;
-        limitWarning.style.display = 'none';
         textInput.classList.add('warning')
     }
 }
 
+
 // Enforce character limit
 function enforceCharLimit() {
+
     const limit = parseInt(charLimit.value, 10);
     const text = textInput.value;
-    const currentCount = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
     
+    const currentCount = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
     charCounter.textContent = `${currentCount}/${limit} characters`;
     
     if (currentCount >= limit) {
-        limitWarning.style.display = 'block';
+        limitWarning.style.display = 'flex';
         textInput.classList.add('warning');
         
         // If we're over the limit, trim the text
@@ -144,7 +143,7 @@ function updateCounts() {
     sentenceCount.textContent = sentences.length;
     
     // Reading time calculation (average adult reads 200-250 words per minute)
-    const wpm = 225; // words per minute
+    const wpm = 50; // words per minute
     const minutes = words.length / wpm;
     
     if (minutes < 1) {
@@ -215,7 +214,7 @@ function updateLetterDensity(text) {
     
     if (sortedLetters.length === 0) {
         const noData = document.createElement('p');
-        noData.textContent = 'No letters to display.';
+        noData.textContent = 'No characters found. Start typing to see letter density.';
         letterDensity.appendChild(noData);
     }
 }
@@ -322,4 +321,4 @@ textInput.addEventListener('paste', function(e) {
 // 
 updateCounts();
 
-  document.addEventListener('DOMContentLoaded', initializeDarkMode);
+document.addEventListener('DOMContentLoaded', initializeDarkMode);
