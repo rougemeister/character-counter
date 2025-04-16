@@ -362,7 +362,7 @@ input[type="checkbox"]:checked::after {
     }
 
     .progress {
-        width: 90%;
+        width: 80%;
         border-radius: 100px;
     }
 
