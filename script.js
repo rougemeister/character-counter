@@ -9,13 +9,13 @@ const readingTime = document.querySelector('.reading-time');
 const letterDensity = document.querySelector('.letter-density');
 const excludeSpaces = document.getElementById('exclude-spaces');
 const setLimit = document.getElementById('char-limit');
-const charLimit = document.querySelector('#char-limit');
+const charLimit = document.querySelector('#char-limit-input');
 const limitWarning = document.querySelector('.limit-warning');
-const charCounter = document.getElementById('char-counter');
-const charLimitInfo = document.querySelector('.char-limit-info');
+const charCounter = document.getElementById('char-limit-input');
+const seeMore = document.querySelector('.toggle-overflow')
 
-console.log(charCount)
-console.log(textInput)
+
+
 
 themeToggler.addEventListener('click', toggleDarkMode)
 
@@ -52,7 +52,6 @@ function initializeDarkMode() {
     if (toggleButton) {
       const isDarkMode = document.documentElement.classList.contains('darkmode');
       toggleButton.setAttribute('aria-pressed', isDarkMode);    
-
       moon.style.display = isDarkMode ? 'none' : 'block';
       sun.style.display = isDarkMode ? 'block' : 'none';
     }
@@ -70,28 +69,28 @@ function initializeDarkMode() {
 
   function updateLimitUI() {
     if (setLimit.checked) {
-        charLimitInfo.style.display = 'flex';
         charLimit.disabled = false;
         enforceCharLimit();
     } else {
         charLimitInfo.style.display = 'none';
         charLimit.disabled = true;
-        limitWarning.style.display = 'none';
-        textInput.style.borderColor = '#ddd';
+        textInput.classList.add('warning')
     }
 }
 
+
 // Enforce character limit
 function enforceCharLimit() {
+
     const limit = parseInt(charLimit.value, 10);
     const text = textInput.value;
-    const currentCount = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
     
+    const currentCount = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
     charCounter.textContent = `${currentCount}/${limit} characters`;
     
     if (currentCount >= limit) {
-        limitWarning.style.display = 'block';
-        textInput.style.borderColor = '#d9534f';
+        limitWarning.style.display = 'flex';
+        textInput.classList.add('warning');
         
         // If we're over the limit, trim the text
         if (currentCount > limit) {
@@ -118,7 +117,7 @@ function enforceCharLimit() {
         }
     } else {
         limitWarning.style.display = 'none';
-        textInput.style.borderColor = '#ddd';
+        textInput.classList.remove('warning')
     }
 }
 
@@ -144,7 +143,7 @@ function updateCounts() {
     sentenceCount.textContent = sentences.length;
     
     // Reading time calculation (average adult reads 200-250 words per minute)
-    const wpm = 225; // words per minute
+    const wpm = 50; // words per minute
     const minutes = words.length / wpm;
     
     if (minutes < 1) {
@@ -162,8 +161,6 @@ function updateCounts() {
 function updateLetterDensity(text) {
     
     letterDensity.innerHTML = '';
-    
-    
     const letterCounts = {};
     let totalLetters = 0;
     
@@ -217,7 +214,7 @@ function updateLetterDensity(text) {
     
     if (sortedLetters.length === 0) {
         const noData = document.createElement('p');
-        noData.textContent = 'No letters to display.';
+        noData.textContent = 'No characters found. Start typing to see letter density.';
         letterDensity.appendChild(noData);
     }
 }
@@ -233,7 +230,6 @@ excludeSpaces.addEventListener('change', function() {
 });
 
 setLimit.addEventListener('change', function() {
-    updateLimitUI();
     updateCounts();
 });
 
@@ -325,4 +321,4 @@ textInput.addEventListener('paste', function(e) {
 // 
 updateCounts();
 
-  document.addEventListener('DOMContentLoaded', initializeDarkMode);
+document.addEventListener('DOMContentLoaded', initializeDarkMode);
