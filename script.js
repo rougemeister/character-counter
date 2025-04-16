@@ -9,13 +9,13 @@ const readingTime = document.querySelector('.reading-time');
 const letterDensity = document.querySelector('.letter-density');
 const excludeSpaces = document.getElementById('exclude-spaces');
 const setLimit = document.getElementById('char-limit');
-const charLimit = document.querySelector('#char-limit');
+const charLimit = document.querySelector('#char-limit-input');
 const limitWarning = document.querySelector('.limit-warning');
-const charCounter = document.getElementById('char-counter');
+const charCounter = document.getElementById('char-limit-input');
 const charLimitInfo = document.querySelector('.char-limit-info');
 
-console.log(charCount)
-console.log(textInput)
+
+
 
 themeToggler.addEventListener('click', toggleDarkMode)
 
@@ -77,7 +77,7 @@ function initializeDarkMode() {
         charLimitInfo.style.display = 'none';
         charLimit.disabled = true;
         limitWarning.style.display = 'none';
-        textInput.style.borderColor = '#ddd';
+        textInput.classList.add('warning')
     }
 }
 
@@ -91,7 +91,7 @@ function enforceCharLimit() {
     
     if (currentCount >= limit) {
         limitWarning.style.display = 'block';
-        textInput.style.borderColor = '#d9534f';
+        textInput.classList.add('warning');
         
         // If we're over the limit, trim the text
         if (currentCount > limit) {
@@ -118,7 +118,7 @@ function enforceCharLimit() {
         }
     } else {
         limitWarning.style.display = 'none';
-        textInput.style.borderColor = '#ddd';
+        textInput.classList.remove('warning')
     }
 }
 
@@ -162,8 +162,6 @@ function updateCounts() {
 function updateLetterDensity(text) {
     
     letterDensity.innerHTML = '';
-    
-    
     const letterCounts = {};
     let totalLetters = 0;
     
@@ -233,7 +231,6 @@ excludeSpaces.addEventListener('change', function() {
 });
 
 setLimit.addEventListener('change', function() {
-    updateLimitUI();
     updateCounts();
 });
 
