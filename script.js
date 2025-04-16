@@ -12,7 +12,9 @@ const setLimit = document.getElementById('char-limit');
 const charLimit = document.querySelector('#char-limit-input');
 const limitWarning = document.querySelector('.limit-warning');
 const charCounter = document.getElementById('char-limit-input');
-const seeMore = document.querySelector('.toggle-overflow')
+const toggleOverflow = document.querySelector('.toggle-overflow')
+const seeMore = document.querySelector('.see-more')
+const seeLess = document.querySelector('.see-less')
 
 
 
@@ -72,7 +74,6 @@ function initializeDarkMode() {
         charLimit.disabled = false;
         enforceCharLimit();
     } else {
-        charLimitInfo.style.display = 'none';
         charLimit.disabled = true;
         textInput.classList.add('warning')
     }
@@ -217,6 +218,28 @@ function updateLetterDensity(text) {
         noData.textContent = 'No characters found. Start typing to see letter density.';
         letterDensity.appendChild(noData);
     }
+
+    if(letterDensity.children.length < 5){
+      toggleOverflow.style.visibility = 'hidden'
+    } else {
+      toggleOverflow.style.visibility = 'visible'
+    }
+
+    seeMore.addEventListener('click', function() {
+      letterDensity.style.height = 'auto';
+      seeMore.style.display = 'none';
+      seeLess.style.display = 'flex';
+    })
+
+    seeLess.addEventListener('click', function() {
+      letterDensity.style.height = '160px';
+      seeMore.style.display = 'flex';
+      seeLess.style.display = 'none';
+    })
+
+    
+
+
 }
 
 
@@ -233,7 +256,7 @@ setLimit.addEventListener('change', function() {
     updateCounts();
 });
 
-console.log(charLimit)
+
 charLimit.addEventListener('input', function() {
     if (setLimit.checked) {
         enforceCharLimit();
