@@ -28,34 +28,37 @@
                 <textarea id="text-input" placeholder="Type or paste your text here..."></textarea>
                 <div class="input-wrapper">
                         <div class="checkbox-wrapper">  
-                            <input type="checkbox" id="spaces">
-                            <label for="spaces">Exclude Spaces</label>
+                            <input id="exclude-spaces" type="checkbox" id="spaces">
+                            <label for="exclude-spaces">Exclude Spaces</label>
                         </div>
                         <div class="checkbox-wrapper">
-                            <input type="checkbox" name="char-limit" id="char-limit">
+                            <input type="checkbox" name="char-limit" id="char-limit" >
                             <label for="char-limit">Set Character Limit</label>
+                            <div class="char-limit-input-container">
+                                <input type="num" name="" id="char-limit-input" placeholder="0">
+                            </div>
                         </div>
                         <div class="char-count">
-                        Approx. reading time &lt1min
+                        Approx. reading time &lt<span class="reading-time">0</span> min
                         </div>
                 </div>
                
                 <div class="tiles">
                     <div class="char tile">
                         <div class="stat">
-                            <h2 class="number">278</h2>
+                            <h2 class="number char-counter">00</h2>
                             <p class="desc">Total Characters</p>
                         </div>
                     </div>
                     <div class="word-count tile">
                         <div class="stat">
-                            <h2 class="number">39</h2>
+                            <h2 class="number word-counter">00</h2>
                             <p class="desc">Word Count</pp>
                         </div>
                     </div>
                     <div class="sentence-count tile">
                         <div class="stat">
-                            <h2 class="number">04</h2>
+                            <h2 class="number sentence-counter">00</h2>
                             <p class="desc">Sentence count</p>
                         </div>
                     </div>
