@@ -306,13 +306,41 @@ input[type="checkbox"]:checked::after {
     display: block;
 }
 
+
+.input-wrapper div {
+    height: 29px;
+
+}
+
 .checkbox-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+.char-limit-input-container {
+    display: none;
+}
 
+#char-limit-input {
+    height: 29px;
+    width: 55px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);  
+    color: var(--secondary-text-color);
+
+  
+}
+
+#char-limit:checked ~ .char-limit-input-container {
+    display: block;
+}
+#char-limit-input:focus {
+   outline: none;
+}
 .toggle-overflow svg {
     fill: var(--primary-text-color);
 }
