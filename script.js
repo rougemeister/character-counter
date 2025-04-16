@@ -6,10 +6,10 @@ const charCount = document.querySelector('.char-counter');
 const wordCount = document.querySelector('.word-counter');
 const sentenceCount = document.querySelector('.sentence-counter');
 const readingTime = document.querySelector('.reading-time');
-const letterDensity = document.getElementById('.letter-density');
+const letterDensity = document.querySelector('.letter-density');
 const excludeSpaces = document.getElementById('exclude-spaces');
 const setLimit = document.getElementById('char-limit');
-const charLimit = document.querySelector('.char-limit');
+const charLimit = document.querySelector('#char-limit');
 const limitWarning = document.querySelector('.limit-warning');
 const charCounter = document.getElementById('char-counter');
 const charLimitInfo = document.querySelector('.char-limit-info');
@@ -19,13 +19,11 @@ console.log(textInput)
 
 themeToggler.addEventListener('click', toggleDarkMode)
 
-// themeToggler.addEventListener('click', toggleTheme)
 
 
 
 // Function to initialize dark mode based on system preference or saved preference
 function initializeDarkMode() {
-    
     const savedPreference = localStorage.getItem('darkmode');
     
     if (savedPreference !== null) {
@@ -37,12 +35,9 @@ function initializeDarkMode() {
       document.documentElement.classList.toggle('darkmode', prefersDarkMode);
       localStorage.setItem('darkmode', prefersDarkMode);
     }
-  
-    
     updateButtonState();
   }
   
-  // Function to toggle dark mode
   function toggleDarkMode() {
     const isDarkMode = document.documentElement.classList.toggle('darkmode');
     localStorage.setItem('darkmode', isDarkMode);
@@ -60,14 +55,11 @@ function initializeDarkMode() {
 
       moon.style.display = isDarkMode ? 'none' : 'block';
       sun.style.display = isDarkMode ? 'block' : 'none';
-    
     }
-   
   }
   
-  // Listen for changes in system preference
+
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    // Only apply system changes if there's no saved preference
     if (localStorage.getItem('darkmode') === null) {
       document.documentElement.classList.toggle('dark', event.matches);
       updateButtonState();
@@ -162,66 +154,67 @@ function updateCounts() {
         readingTime.textContent = `${minutes.toFixed(1)} min`;
     }
     
-    // Calculate letter density
+ 
     updateLetterDensity(text);
 }
 
-// Update letter density visualization
+
 function updateLetterDensity(text) {
-    // Clear previous density display
+    
     letterDensity.innerHTML = '';
     
-    // Create an object to store letter counts
+    
     const letterCounts = {};
     let totalLetters = 0;
     
     // Count each letter (case-insensitive)
     for (let i = 0; i < text.length; i++) {
         const char = text[i].toLowerCase();
-        // Only count letters a-z
+        
         if (/[a-z]/.test(char)) {
             letterCounts[char] = (letterCounts[char] || 0) + 1;
             totalLetters++;
         }
     }
     
-    // Sort letters by frequency (descending)
+    
     const sortedLetters = Object.keys(letterCounts).sort((a, b) => 
         letterCounts[b] - letterCounts[a]
     );
     
-    // Create visualization for each letter
-    sortedLetters.forEach(letter => {
-        const count = letterCounts[letter];
-        const percentage = totalLetters > 0 ? (count / totalLetters * 100) : 0;
-        
-        const letterRow = document.createElement('div');
-        letterRow.className = 'letter-row';
-        
-        const letterElem = document.createElement('div');
-        letterElem.className = 'letter';
-        letterElem.textContent = letter;
-        
-        const barContainer = document.createElement('div');
-        barContainer.className = 'bar-container';
-        
-        const bar = document.createElement('div');
-        bar.className = 'bar';
-        bar.style.width = `${percentage}%`;
-        
-        const percentageElem = document.createElement('div');
-        percentageElem.className = 'percentage';
-        percentageElem.textContent = `${percentage.toFixed(1)}%`;
-        
-        barContainer.appendChild(bar);
-        letterRow.appendChild(letterElem);
-        letterRow.appendChild(barContainer);
-        letterRow.appendChild(percentageElem);
-        
-        letterDensity.appendChild(letterRow);
-    });
     
-    // If no letters found
+    sortedLetters.forEach(letter => {
+      const count = letterCounts[letter];
+      const percentage = totalLetters > 0 ? (count / totalLetters * 100) : 0;
+  
+      const progressBar = document.createElement('div');
+      progressBar.className = 'progress-bar';
+  
+      const letterElem = document.createElement('div');
+      letterElem.className = 'letter';
+      letterElem.textContent = letter.toUpperCase();
+  
+      const progress = document.createElement('div');
+      progress.className = 'progress';
+  
+      const barVisible = document.createElement('div');
+      barVisible.className = `bar-visible letter-${letter}`;
+      barVisible.style.width = `${percentage}%`;
+  
+      const percentageElem = document.createElement('p');
+      percentageElem.className = 'percentage';
+      percentageElem.textContent = `${count} (${percentage.toFixed(2)}%)`;
+  
+      progress.appendChild(barVisible);
+      progressBar.appendChild(letterElem);
+      progressBar.appendChild(progress);
+      progressBar.appendChild(percentageElem);
+  
+      letterDensity.appendChild(progressBar);
+  });
+  
+    
+    
     if (sortedLetters.length === 0) {
         const noData = document.createElement('p');
         noData.textContent = 'No letters to display.';
@@ -229,7 +222,7 @@ function updateLetterDensity(text) {
     }
 }
 
-// Event listeners
+
 textInput.addEventListener('input', updateCounts);
 
 excludeSpaces.addEventListener('change', function() {
@@ -244,6 +237,7 @@ setLimit.addEventListener('change', function() {
     updateCounts();
 });
 
+console.log(charLimit)
 charLimit.addEventListener('input', function() {
     if (setLimit.checked) {
         enforceCharLimit();
@@ -251,7 +245,7 @@ charLimit.addEventListener('input', function() {
     }
 });
 
-// Handle paste events to enforce character limit
+
 textInput.addEventListener('paste', function(e) {
     if (setLimit.checked) {
         const limit = parseInt(charLimit.value, 10);
@@ -259,7 +253,7 @@ textInput.addEventListener('paste', function(e) {
         const clipboardData = e.clipboardData || window.clipboardData;
         const pastedText = clipboardData.getData('Text');
         
-        // Calculate how many characters we can still accept
+        
         const currentCount = excludeSpaces.checked ? 
             currentText.replace(/\s/g, '').length : 
             currentText.length;
@@ -267,13 +261,11 @@ textInput.addEventListener('paste', function(e) {
         const remainingChars = limit - currentCount;
         
         if (remainingChars <= 0) {
-            // No space left, prevent the paste
             e.preventDefault();
             return;
         }
         
         if (excludeSpaces.checked) {
-            // Count non-space characters in pasted text
             const nonSpacePastedCount = pastedText.replace(/\s/g, '').length;
             
             if (nonSpacePastedCount > remainingChars) {
@@ -308,33 +300,29 @@ textInput.addEventListener('paste', function(e) {
                 updateCounts();
             }
         } else {
-            // Simple case: check if pasted text exceeds the limit
             if (pastedText.length > remainingChars) {
                 e.preventDefault();
                 
-                // Insert only up to the limit
+                
                 const allowedText = pastedText.substring(0, remainingChars);
                 
-                // Insert at cursor position
+              
                 const start = textInput.selectionStart;
                 const end = textInput.selectionEnd;
                 textInput.value = currentText.substring(0, start) + 
                     allowedText + 
                     currentText.substring(end);
                 
-                // Set cursor position after the pasted text
                 textInput.selectionStart = textInput.selectionEnd = start + allowedText.length;
                 
-                // Update counts
+                
                 updateCounts();
             }
         }
     }
 });
 
-// Initialize
-charLimitInfo.style.display = 'none';
-charLimit.disabled = !setLimit.checked;
+// 
 updateCounts();
 
   document.addEventListener('DOMContentLoaded', initializeDarkMode);
