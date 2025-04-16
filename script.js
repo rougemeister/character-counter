@@ -1,4 +1,5 @@
-const sun = document.querySelector('.sun')
+function init() {
+  const sun = document.querySelector('.sun')
 const moon = document.querySelector('.moon') 
 const themeToggler = document.querySelector('.theme-toggler')  
 const textInput = document.getElementById('text-input'); 
@@ -50,7 +51,6 @@ function initializeDarkMode() {
   // Function to update toggle button state
   function updateButtonState() {
     const toggleButton = document.querySelector('.theme-toggler');
-    console.log(toggleButton)
     if (toggleButton) {
       const isDarkMode = document.documentElement.classList.contains('darkmode');
       toggleButton.setAttribute('aria-pressed', isDarkMode);    
@@ -236,10 +236,6 @@ function updateLetterDensity(text) {
       seeMore.style.display = 'flex';
       seeLess.style.display = 'none';
     })
-
-    
-
-
 }
 
 
@@ -341,7 +337,10 @@ textInput.addEventListener('paste', function(e) {
     }
 });
 
-// 
-updateCounts();
 
-document.addEventListener('DOMContentLoaded', initializeDarkMode);
+updateCounts();
+}
+
+document.addEventListener('DOMContentLoaded',  ()=>{
+  init();
+} );
