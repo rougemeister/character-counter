@@ -1,5 +1,5 @@
 function init() {
-  const sun = document.querySelector('.sun')
+const sun = document.querySelector('.sun')
 const moon = document.querySelector('.moon') 
 const themeToggler = document.querySelector('.theme-toggler')  
 const textInput = document.getElementById('text-input'); 
@@ -21,8 +21,6 @@ const seeLess = document.querySelector('.see-less')
 
 
 
-themeToggler.addEventListener('click', toggleDarkMode)
-
 
 
 
@@ -41,6 +39,8 @@ function initializeDarkMode() {
     }
     updateButtonState();
   }
+
+  initializeDarkMode();
   
   function toggleDarkMode() {
     const isDarkMode = document.documentElement.classList.toggle('darkmode');
@@ -67,6 +67,10 @@ function initializeDarkMode() {
       updateButtonState();
     }
   });
+
+
+
+  themeToggler.addEventListener('click', toggleDarkMode)
   
 
 
@@ -328,8 +332,8 @@ textInput.addEventListener('paste', function(e) {
     }
 });
 
-
 updateCounts();
+
 }
 
 document.addEventListener('DOMContentLoaded',  ()=>{
