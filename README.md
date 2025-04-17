@@ -21,8 +21,6 @@ A lightweight, user-friendly web application to count the characters, words, sen
 1. Visit the [Character Counter](https://rougemeister.github.io/character-counter/) website
 2. Type or paste your text into the text area
 3. View the live statistics update as you type
-4. Use the "Copy Stats" button to copy the statistics to your clipboard
-5. Use the "Clear" button to reset the text area
 
 ## Why Use This Tool?
 
