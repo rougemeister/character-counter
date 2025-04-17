@@ -14,6 +14,7 @@ const charLimit = document.querySelector('#char-limit-input');
 const limitWarning = document.querySelector('.limit-warning');
 const charCounter = document.getElementById('char-limit-input');
 const toggleOverflow = document.querySelector('.toggle-overflow')
+const limitNumber = document.querySelector('.limit-number')
 const seeMore = document.querySelector('.see-more')
 const seeLess = document.querySelector('.see-less')
 
@@ -69,22 +70,12 @@ function initializeDarkMode() {
   
 
 
-  function updateLimitUI() {
-    if (setLimit.checked) {
-        charLimit.disabled = false;
-        enforceCharLimit();
-    } else {
-        charLimit.disabled = true;
-        textInput.classList.add('warning')
-    }
-}
-
-
 // Enforce character limit
 function enforceCharLimit() {
 
     const limit = parseInt(charLimit.value, 10);
     const text = textInput.value;
+    limitNumber.textContent = limit
     
     const currentCount = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
     charCounter.textContent = `${currentCount}/${limit} characters`;

@@ -138,6 +138,7 @@ textarea.warning:focus {
 }
 
 .limit-warning {
+    justify-content: flex-start;
     gap: 10px;
     color: var(--orange-800);
     margin-top: 10px;
