@@ -25,6 +25,7 @@
 
 /* Styling */
     --border-color: var(--neutral-200);
+    --border-input: var(--neutral-900);
     --bg-color: var(--neutral-100);
 
 }
@@ -34,12 +35,15 @@
     padding: 0;
     margin: 0;
 }
+
+
 /* Darkmode */
 .darkmode {
    --background-img: url('./assets/images/bg-dark-theme.png');
    --primary-text-color: var(--neutral-100);
    --secondary-text-color: var(--neutral-200);
    --border-color: var(--neutral-600);
+   --border-input: var(--neutral-200);
    --bg-color: var(--neutral-700);
    
 }
@@ -112,7 +116,7 @@ textarea {
     height: 200px;
     padding: 10px;
     border-radius: 5px;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     background-color: var(--bg-color);
     color: var(--secondary-text-color);
     font-size: 16px;
@@ -123,8 +127,29 @@ textarea {
 }
 
 textarea:focus {
-    outline: 1px solid var(--blue-500);
-    box-shadow: 0 0 5px 2px var(--blue-500);
+    outline: none;
+    box-shadow: 0 0 10px 0px var(--blue-500);
+    border: 1px solid var(--blue-500);
+}
+
+textarea.warning:focus {
+    border: 1px solid var(--orange-800);
+    box-shadow: 0 0 10px 0px var(--orange-800);
+}
+
+.limit-warning {
+    justify-content: flex-start;
+    gap: 10px;
+    color: var(--orange-800);
+    margin-top: 10px;
+    transition: all 0.3s;
+    display: none;
+    align-items: center;
+    
+}
+
+.limit-warning svg {
+    stroke: var(--orange-800);
 }
 
 .input-wrapper {
@@ -140,7 +165,7 @@ textarea:focus {
     justify-content: center;
     gap: 16px;
     margin-top: 16px;
-    color: var(--text-color);
+    color: var(--neutral-900);
 }
 
 .tiles .tile {
@@ -191,6 +216,9 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    height: 160px;
+    overflow: hidden;
+    transition: height 20s ease;
 }
 
 .progress-bar-title {
@@ -230,15 +258,30 @@ textarea:focus {
 
 .percentage {
     text-align: right;
+    text-wrap: nowrap;
     width: 87px;
 }
 
 .toggle-overflow {
+    margin: 20px 0;
+    font-size: 20px;
+    cursor: pointer;
+    
+}
+
+.see-more, .see-less {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 20px 0;
     font-size: 20px;
+
+
+}
+
+
+
+.see-less {
+    display: none;
 }
 
 .letter-E {
@@ -306,13 +349,41 @@ input[type="checkbox"]:checked::after {
     display: block;
 }
 
+
+.input-wrapper div {
+    height: 29px;
+
+}
+
 .checkbox-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+.char-limit-input-container {
+    display: none;
+}
 
+#char-limit-input {
+    height: 29px;
+    width: 55px;
+    margin-left: 10px;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid var(--border-input);  
+    color: var(--secondary-text-color);
+
+  
+}
+
+#char-limit:checked ~ .char-limit-input-container {
+    display: block;
+}
+#char-limit-input:focus {
+   outline: none;
+}
 .toggle-overflow svg {
     fill: var(--primary-text-color);
 }
@@ -334,7 +405,7 @@ input[type="checkbox"]:checked::after {
     }
 
     .progress {
-        width: 90%;
+        width: 80%;
         border-radius: 100px;
     }
 
