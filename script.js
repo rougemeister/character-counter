@@ -70,7 +70,7 @@ function initializeDarkMode() {
 
 
 
-  themeToggler.addEventListener('click', toggleDarkMode)
+themeToggler.addEventListener('click', toggleDarkMode)
   
 
 
@@ -128,15 +128,15 @@ function updateCounts() {
     
     // Character count (with or without spaces)
     const charCountValue = excludeSpaces.checked ? text.replace(/\s/g, '').length : text.length;
-    charCount.textContent = charCountValue;
+    charCount.textContent = charCountValue < 10 ? `0${charCountValue}` : charCountValue;
     
     // Word count
     const words = text.trim() === '' ? [] : text.trim().split(/\s+/);
-    wordCount.textContent = words.length;
+    wordCount.textContent = words.length < 10 ? `0${words.length}` : words.length;
     
     // Sentence count
     const sentences = text.split(/[.!?]+/).filter(sentence => sentence.trim() !== '');
-    sentenceCount.textContent = sentences.length;
+    sentenceCount.textContent = sentences.length < 10 ? `0${sentences.length}` : sentences.length;
     
     // Reading time calculation (average adult reads 200-250 words per minute)
     const wpm = 50; // words per minute
