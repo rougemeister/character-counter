@@ -124,6 +124,7 @@ textarea {
     resize: none;
     line-height: 1.5;
     transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
 }
 
 textarea:focus {
@@ -308,7 +309,12 @@ textarea.warning:focus {
     width: 15px;
 }
 
+
+
 /* Checkbox styles */
+input {
+    cursor: pointer;
+}
 input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
@@ -354,6 +360,7 @@ input[type="checkbox"]:checked::after {
     height: 29px;
 
 }
+
 
 .checkbox-wrapper {
     display: flex;
