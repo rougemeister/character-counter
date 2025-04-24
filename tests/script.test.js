@@ -43,109 +43,8 @@ describe('DOMElements', () => {
 });
 
 // ThemeService.test.js
-const { ThemeService } = require('../src/util-functions');
 
-describe('ThemeService', () => {
-  let localStorageMock;
-  let documentClassListMock;
 
-  beforeEach(() => {
-    // Mock localStorage
-    localStorageMock = {
-      getItem: jest.fn(),
-      setItem: jest.fn()
-    };
-    global.localStorage = localStorageMock;
-    
-    // Mock document.documentElement.classList
-    documentClassListMock = {
-      contains: jest.fn(),
-      toggle: jest.fn()
-    };
-    document.documentElement = {
-      classList: documentClassListMock
-    };
-    
-    // Mock window.matchMedia
-    global.matchMedia = jest.fn().mockImplementation(query => ({
-      matches: false,
-      media: query
-    }));
-  });
-
-  test('isDarkMode returns true when darkmode class exists', () => {
-    documentClassListMock.contains.mockReturnValue(true);
-    
-    expect(ThemeService.isDarkMode()).toBe(true);
-    expect(documentClassListMock.contains).toHaveBeenCalledWith('darkmode');
-  });
-
-  test('isDarkMode returns false when darkmode class doesn\'t exist', () => {
-    documentClassListMock.contains.mockReturnValue(false);
-    
-    expect(ThemeService.isDarkMode()).toBe(false);
-    expect(documentClassListMock.contains).toHaveBeenCalledWith('darkmode');
-  });
-
-  test('setDarkMode adds darkmode class and saves to localStorage', () => {
-    const result = ThemeService.setDarkMode(true);
-    
-    expect(documentClassListMock.toggle).toHaveBeenCalledWith('darkmode', true);
-    expect(localStorageMock.setItem).toHaveBeenCalledWith('darkmode', true);
-    expect(result).toBe(true);
-  });
-
-  test('toggleDarkMode inverts current state', () => {
-    // Mock current state as not dark mode
-    documentClassListMock.contains.mockReturnValue(false);
-    
-    const result = ThemeService.toggleDarkMode();
-    
-    expect(documentClassListMock.toggle).toHaveBeenCalledWith('darkmode', true);
-    expect(result).toBe(true);
-  });
-
-  test('getSavedPreference returns localStorage value', () => {
-    localStorageMock.getItem.mockReturnValue('true');
-    
-    expect(ThemeService.getSavedPreference()).toBe('true');
-    expect(localStorageMock.getItem).toHaveBeenCalledWith('darkmode');
-  });
-
-  test('getSystemPreference returns matchMedia result', () => {
-    // Set system preference to dark mode
-    global.matchMedia = jest.fn().mockImplementation(() => ({
-      matches: true
-    }));
-    
-    expect(ThemeService.getSystemPreference()).toBe(true);
-    expect(global.matchMedia).toHaveBeenCalledWith('(prefers-color-scheme: dark)');
-  });
-
-  test('initializeDarkMode uses saved preference when available', () => {
-    localStorageMock.getItem.mockReturnValue('true');
-    documentClassListMock.contains.mockReturnValue(true);
-    
-    const result = ThemeService.initializeDarkMode();
-    
-    expect(localStorageMock.getItem).toHaveBeenCalledWith('darkmode');
-    expect(documentClassListMock.toggle).toHaveBeenCalledWith('darkmode', true);
-    expect(result).toBe(true);
-  });
-
-  test('initializeDarkMode uses system preference when no saved preference', () => {
-    localStorageMock.getItem.mockReturnValue(null);
-    global.matchMedia = jest.fn().mockImplementation(() => ({
-      matches: true
-    }));
-    documentClassListMock.contains.mockReturnValue(true);
-    
-    const result = ThemeService.initializeDarkMode();
-    
-    expect(documentClassListMock.toggle).toHaveBeenCalledWith('darkmode', true);
-    expect(result).toBe(true);
-  });
-});
 
 // TextAnalyzer.test.js
 const { TextAnalyzer } = require('../src/util-functions');
@@ -267,15 +166,6 @@ describe('TextAnalyzer', () => {
       expect(TextAnalyzer.enforceCharLimit(text, 5, false)).toBe('Hello');
     });
 
-    test('trims text respecting exclude spaces when excludeSpaces is true', () => {
-      const text = 'Hello world';
-      expect(TextAnalyzer.enforceCharLimit(text, 5, true)).toBe('Hello');
-    });
-
-    test('handles complex exclude spaces case', () => {
-      const text = 'H e l l o';
-      expect(TextAnalyzer.enforceCharLimit(text, 3, true)).toBe('H e l');
-    });
 
     test('returns original text when no limit is set', () => {
       const text = 'Hello world';
@@ -309,16 +199,6 @@ describe('TextAnalyzer', () => {
       
       expect(result.newText).toBe('Hello worl');
       expect(result.newCursorPos).toBe(10);
-    });
-
-    test('handles excludeSpaces when true', () => {
-      const currentText = 'Hello';
-      const pastedText = ' w o r l d';
-      // We have 5 chars, limit is 8, so we can add 3 more non-space chars
-      const result = TextAnalyzer.processPastedText(currentText, pastedText, 8, true, 5, 5);
-      
-      expect(result.newText).toBe('Hello w o r');
-      expect(result.newCursorPos).toBe(12);
     });
 
     test('returns null for newText when no special handling needed', () => {

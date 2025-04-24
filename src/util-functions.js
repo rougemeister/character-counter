@@ -24,41 +24,52 @@ export const DOMElements = {
   
   // Theme service - handles dark mode functionality
   export const ThemeService = {
+    // Check if the darkmode class exists on the document
     isDarkMode() {
       return document.documentElement.classList.contains('darkmode');
     },
-    
+  
+    // Set dark mode based on the boolean value passed and save it to localStorage
     setDarkMode(isDark) {
+      // Ensure that we toggle the darkmode class correctly
       document.documentElement.classList.toggle('darkmode', isDark);
-      localStorage.setItem('darkmode', isDark);
+      localStorage.setItem('darkmode', JSON.stringify(isDark)); // Ensure we save it as a stringified boolean
       return isDark;
     },
-    
+  
+    // Toggle the current dark mode state
     toggleDarkMode() {
-      return this.setDarkMode(!this.isDarkMode());
+      const currentState = this.isDarkMode();
+      const newState = !currentState;  // Invert current state
+      return this.setDarkMode(newState); // Apply the new state
     },
-    
+  
+    // Retrieve the saved dark mode preference from localStorage
     getSavedPreference() {
-      return localStorage.getItem('darkmode');
+      const savedPreference = localStorage.getItem('darkmode');
+      // Parse the saved value and return as boolean (true/false)
+      return savedPreference ? JSON.parse(savedPreference) : null; // Return null if no saved preference
     },
-    
+  
+    // Get the system dark mode preference
     getSystemPreference() {
       return window.matchMedia('(prefers-color-scheme: dark)').matches;
     },
-    
+  
+    // Initialize dark mode based on saved preference or system preference
     initializeDarkMode() {
       const savedPreference = this.getSavedPreference();
-      
       if (savedPreference !== null) {
-        this.setDarkMode(savedPreference === 'true');
+        this.setDarkMode(savedPreference); // Use saved preference if available
       } else {
-        const prefersDarkMode = this.getSystemPreference();
+        const prefersDarkMode = this.getSystemPreference(); // Use system preference if no saved value
         this.setDarkMode(prefersDarkMode);
       }
       
       return this.isDarkMode();
     }
   };
+  
   
   // Text analyzer - core business logic for text analysis
   export const TextAnalyzer = {
