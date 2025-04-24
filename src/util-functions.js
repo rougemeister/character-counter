@@ -1,6 +1,3 @@
-// text-analyzer.js - Core module with exported functionality
-
-// DOM Elements module - separates DOM queries from business logic
 export const DOMElements = {
     getElements() {
       return {

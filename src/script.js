@@ -1,5 +1,3 @@
-// app.js - Main application that imports and uses the core module
-
 import { DOMElements, ThemeService, TextAnalyzer, UIController } from './util-functions.js';
 
 // App - main controller that ties everything together
