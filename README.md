@@ -1,3 +1,4 @@
+
 # Character Counter
 
 A lightweight, user-friendly web application to count the characters, words, sentences, and paragraphs in your text.
@@ -47,6 +48,83 @@ If you'd like to run the Character Counter locally:
    cd character-counter
    ```
 3. Open `index.html` in your preferred browser
+
+## Testing with Jest
+
+To run unit tests using Jest, follow these steps:
+
+### 1. Install Jest
+First, make sure you have Jest installed in your project:
+```
+npm install --save-dev jest
+```
+
+### 2. Configure Jest
+Add a `jest.config.js` file in the root directory of your project:
+```js
+module.exports = {
+  testEnvironment: 'jsdom',
+  transform: {
+    '^.+\.js$': 'babel-jest',
+  },
+};
+```
+
+### 3. Mocking DOM Elements in Jest
+
+You can mock DOM elements and events using Jest's built-in methods and Jest DOM utilities.
+
+#### Example: Testing Character Counting
+
+Consider a function `countCharacters` that updates the character count in a DOM element when the user types into a textarea. Here's an example of how you might write a Jest test for this:
+
+```js
+import { countCharacters } from './characterCounter';
+
+describe('countCharacters', () => {
+  let inputElement;
+  let outputElement;
+
+  beforeEach(() => {
+    // Set up the DOM elements
+    document.body.innerHTML = `
+      <textarea id="inputText"></textarea>
+      <div id="output">0 characters</div>
+    `;
+    inputElement = document.getElementById('inputText');
+    outputElement = document.getElementById('output');
+  });
+
+  it('should update character count when text is entered', () => {
+    // Set an initial value in the textarea
+    inputElement.value = 'Hello, World!';
+    
+    // Call the function that updates the character count
+    countCharacters();
+    
+    // Trigger the 'input' event on the textarea
+    inputElement.dispatchEvent(new Event('input'));
+
+    // Check if the output element's text has updated correctly
+    expect(outputElement.textContent).toBe('13 characters');
+  });
+});
+```
+
+#### Explanation:
+
+- **`document.body.innerHTML`**: Sets up the HTML structure that is needed for the test.
+- **`inputElement.value`**: Simulates entering text into the textarea.
+- **`dispatchEvent`**: Simulates the `input` event that is triggered when the user types in the textarea.
+- **`expect`**: Asserts that the output is correct based on the expected character count.
+
+### 4. Running Tests
+
+Once the tests are set up, you can run them using:
+```
+npm test
+```
+Jest will automatically find and run any tests defined in files with a `.test.js` extension.
 
 ## Contributing
 
